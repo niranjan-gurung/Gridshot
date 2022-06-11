@@ -153,20 +153,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\GameoverState.cpp" />
-    <ClCompile Include="src\GameplayState.cpp" />
+    <ClCompile Include="src\States\GameoverState.cpp" />
+    <ClCompile Include="src\States\GameplayState.cpp" />
     <ClCompile Include="src\Game.cpp" />
-    <ClCompile Include="src\MainMenuState.cpp" />
+    <ClCompile Include="src\States\MainMenuState.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\GameoverState.h" />
-    <ClInclude Include="src\GameplayState.h" />
-    <ClInclude Include="src\MainMenuState.h" />
+    <ClInclude Include="src\States\GameoverState.h" />
+    <ClInclude Include="src\States\GameplayState.h" />
+    <ClInclude Include="src\States\MainMenuState.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\State.h" />
-    <ClInclude Include="src\Stats.h" />
-    <ClInclude Include="src\Util.h" />
+    <ClInclude Include="src\Util\Stats.h" />
+    <ClInclude Include="src\Util\Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

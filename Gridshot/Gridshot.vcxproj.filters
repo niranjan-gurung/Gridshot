@@ -21,13 +21,13 @@
     <ClCompile Include="src\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\MainMenuState.cpp">
+    <ClCompile Include="src\States\MainMenuState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameplayState.cpp">
+    <ClCompile Include="src\States\GameplayState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\GameoverState.cpp">
+    <ClCompile Include="src\States\GameoverState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,22 +35,22 @@
     <ClInclude Include="src\State.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Util.h">
+    <ClInclude Include="src\Util\Util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\MainMenuState.h">
+    <ClInclude Include="src\States\MainMenuState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameplayState.h">
+    <ClInclude Include="src\States\GameplayState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\GameoverState.h">
+    <ClInclude Include="src\States\GameoverState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Stats.h">
+    <ClInclude Include="src\Util\Stats.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
