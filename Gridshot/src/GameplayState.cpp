@@ -1,13 +1,11 @@
 #include "GameplayState.h"
 
 GameplayState::GameplayState(std::shared_ptr<sf::RenderWindow> window, std::stack<State*>* states)
-    : State(window, states), targetHit(false)//, stats(nullptr)
+    : State(window, states), targetHit(false)
 {
-    //stats = std::make_unique<GameplayState>(window, states);
-
-    //(*stats).setScore(); 
-    hitCounter = missCounter = 0; 
-    accuracy = 100;
+    // Heap init Stats object and update its values during gameplay.
+    // This object will get passed into and printed in the gameoverstate as a summary:
+    stats = std::make_unique<Stats>();
 
     tElapsedTime = 0;
 
@@ -15,8 +13,8 @@ GameplayState::GameplayState(std::shared_ptr<sf::RenderWindow> window, std::stac
     std::cout << "target initialised\n";
 
     util.SetupText(tTimer, "");                                                         // timer text
-    util.SetupText(tScore, "Score: " + std::to_string(score));                    // score text
-    util.SetupText(tAccuracy, "Accuracy: " + std::to_string(accuracy) + "%");     // accuracy text
+    util.SetupText(tScore, "Score: " + std::to_string(stats->score));                   // score text
+    util.SetupText(tAccuracy, "Accuracy: " + std::to_string(stats->accuracy) + "%");    // accuracy text
 }
 
 GameplayState::~GameplayState() 
@@ -40,12 +38,12 @@ void GameplayState::Update()
             {
                 if (targets[i].getGlobalBounds().contains(window->mapPixelToCoords(sf::Mouse::getPosition(*window)))) 
                 {
-                    hitCounter++;
-                    score += 10;
+                    stats->hitCounter++;
+                    stats->score += 10;
 
                     // cap accuracy at 100%
-                    if (accuracy < 100)
-                        accuracy++;
+                    if (stats->accuracy < 100)
+                        stats->accuracy++;
 
                     targetHit = true;
                     targets[i].setPosition(width(rng), height(rng));
@@ -63,8 +61,8 @@ void GameplayState::Update()
             // dont increment missed shots when clicking initial screen to proceed:
             if (!targetHit)
             {
-                missCounter++;
-                accuracy -= 1.5;  // if miss -> lower accuracy
+                stats->missCounter++;
+                stats->accuracy -= 1.5;  // if miss -> lower accuracy
             }
             break;
         }
@@ -77,18 +75,18 @@ void GameplayState::Update()
     tTimer.setPosition(static_cast<float>(util.GetScreenWidth()) / 2, 5);     
 
     // score:
-    tScore.setString("Score: " + std::to_string(score));
+    tScore.setString("Score: " + std::to_string(stats->score));
     tScore.setPosition(static_cast<float>(util.GetScreenWidth()) - 200, 5);
 
     // accuracy:
-    tAccuracy.setString("Accuracy: " + std::to_string(accuracy) + "%");
+    tAccuracy.setString("Accuracy: " + std::to_string(stats->accuracy) + "%");
     tAccuracy.setPosition(200, 5);
 
-    // when gameplay timer runs out:
+    // when gameplay timer runs out, enter the gameover state:
     if (tElapsedTime >= TIME_LIMIT)
     {
         std::cout << "Time Up!" << std::endl;
-        states->push(new GameoverState(window, states));
+        states->push(new GameoverState(window, states, stats));
     }
 }
 

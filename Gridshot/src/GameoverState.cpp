@@ -1,13 +1,13 @@
 #include "GameoverState.h"
 #include "GameplayState.h"
 
-GameoverState::GameoverState(std::shared_ptr<sf::RenderWindow> window, std::stack<State*>* states)
-    : State(window, states)//, b(nullptr)
+GameoverState::GameoverState(std::shared_ptr<sf::RenderWindow> window, std::stack<State*>* states, std::shared_ptr<Stats> stats)
+    : State(window, states), localStats(stats)
 {
     std::cout << "inside the gameover state constructor!" << std::endl;
-
-    //b = s;
-
+    
+    stats = nullptr;    // don't need this as 'localStats' now has its values
+    
     displayStatSummary();
 }
 
@@ -18,20 +18,10 @@ GameoverState::~GameoverState()
 
 void GameoverState::displayStatSummary()
 {
-    /*std::cout << (*a).getStats()->score << std::endl;
-    std::cout << (*a).getStats()->hitCounter << std::endl;
-    std::cout << (*a).getStats()->missCounter << std::endl;
-    std::cout << (*a).getStats()->accuracy << std::endl;*/
-
-    /*std::cout << b->getStats().score << std::endl;
-    std::cout << b->getStats().hitCounter << std::endl;
-    std::cout << b->getStats().missCounter << std::endl;
-    std::cout << b->getStats().accuracy << std::endl;*/
-
-    /*std::cout << (*b).getStats()->score << std::endl;
-    std::cout << (*b).getStats()->hitCounter << std::endl;
-    std::cout << (*b).getStats()->missCounter << std::endl;
-    std::cout << (*b).getStats()->accuracy << std::endl;*/
+    std::cout << "score: " << localStats->score << std::endl;
+    std::cout << "hitcounter: " << localStats->hitCounter << std::endl;
+    std::cout << "misscounter: " << localStats->missCounter << std::endl;
+    std::cout << "accuracy: " << localStats->accuracy << std::endl;
 }
 
 void GameoverState::Update()

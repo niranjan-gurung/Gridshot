@@ -1,17 +1,15 @@
 #pragma once
 
 #include "State.h"
-
-class GameplayState;
+#include "Stats.h"
 
 class GameoverState : public State
 {
 private:
-	//std::shared_ptr<GameplayState> a;
-	//GameplayState* b;
+	std::shared_ptr<Stats> localStats;
 
 public:
-	GameoverState(std::shared_ptr<sf::RenderWindow> window, std::stack<State*>* states);
+	GameoverState(std::shared_ptr<sf::RenderWindow> window, std::stack<State*>* states, std::shared_ptr<Stats> stats);
 	~GameoverState();
 
 	void displayStatSummary();

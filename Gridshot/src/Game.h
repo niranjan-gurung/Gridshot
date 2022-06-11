@@ -8,10 +8,10 @@ private:
 	std::stack<State*> states;						// track states
 	Util screenDimensions;							// screen width + height
 
-													// all game texts:
-													/*sf::Text tStartText, tTimer, tEndText, 
-													tExitText, tRestartGameText, tScore, 
-													tHit, tMiss, tAccuracy;*/
+	// all game texts:
+	/*sf::Text tStartText, tTimer, tEndText, 
+	tExitText, tRestartGameText, tScore, 
+	tHit, tMiss, tAccuracy;*/
 
 private:
 	void InitGameWindow();
