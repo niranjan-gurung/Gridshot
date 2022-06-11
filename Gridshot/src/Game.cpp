@@ -1,16 +1,6 @@
 #include "Game.h"
 
 Game::Game() 
-/*: tFont(SetupFont()), 
-tStartText(SetupText(tFont, fontColor, fontSize, "Click to Start!")), 
-tTimer(SetupText(tFont, fontColor, fontSize, "")), 
-tEndText(SetupText(tFont, fontColor, fontSize, "Time Up!")),
-tExitText(SetupText(tFont, fontColor, fontSize, "Press Esc to close game!")),
-tRestartGameText(SetupText(tFont, fontColor, fontSize, "Press Space to restart game!")),
-tScore(SetupText(tFont, fontColor, fontSize, "Score: " + std::to_string(score))),    
-tHit(SetupText(tFont, fontColor, fontSize, "Targets hit: " + std::to_string(hitCounter))),    
-tMiss(SetupText(tFont, fontColor, fontSize, "Targets missed: " + std::to_string(missedCounter))),
-tAccuracy(SetupText(tFont, fontColor, fontSize, "Accuracy: " + std::to_string(accuracy) + "%"))*/
 {
     InitGameWindow();
     InitStates();
@@ -114,25 +104,6 @@ void Game::Update()
     //          }
     //          break;
     //       }
-    //}
-
-    /* if-else fixes issues with pregame timer exceeding the time limit before starting the game: */
-    // if 60 seconds is reached before gameplay is even started:
-    //if (tElapsedTime >= TIME_LIMIT && !targetInit)
-    //{
-    //    menuTimerThresholdPassed = true;    // tracks if timer has exceeded limit before gameplay
-    //}
-    //// if gameplay started AFTER hitting the 60 sec time limit
-    //// then reset the timer and set the timer flag to false:
-    //else if (targetInit && menuTimerThresholdPassed)
-    //{
-    //    menuTimerThresholdPassed = false;
-    //    clock.restart();
-    //}
-    //// the actual gameplay timer:
-    //else if (tElapsedTime >= TIME_LIMIT && targetInit)
-    //{
-    //    paused = true;
     //}
 }
 

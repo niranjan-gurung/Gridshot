@@ -1,5 +1,4 @@
 #include "GameoverState.h"
-#include "GameplayState.h"
 
 GameoverState::GameoverState(std::shared_ptr<sf::RenderWindow> window, std::stack<State*>* states, std::shared_ptr<Stats> stats)
     : State(window, states), localStats(stats)
@@ -8,6 +7,15 @@ GameoverState::GameoverState(std::shared_ptr<sf::RenderWindow> window, std::stac
     
     stats = nullptr;    // don't need this as 'localStats' now has its values
     
+    // game summary setup:
+    util.SetupText(tEndText, "Time Up!");
+    util.SetupText(tExitText, "Press Esc to close game!");
+    util.SetupText(tRestartGameText, "Press Space to restart game!");
+    util.SetupText(tScore, "Score: " + std::to_string(localStats->score));
+    util.SetupText(tHit, "Targets hit: " + std::to_string(localStats->hitCounter));
+    util.SetupText(tMiss, "Targets missed: " + std::to_string(localStats->missCounter));
+    util.SetupText(tAccuracy, "Accuracy: " + std::to_string(localStats->accuracy) + "%");
+
     displayStatSummary();
 }
 
@@ -67,13 +75,27 @@ void GameoverState::Update()
             }
             break;
         }
-
     }
+
+    // game summary text position setup:
+    tRestartGameText.setPosition(static_cast<float>(util.GetScreenWidth())/2, static_cast<float>(util.GetScreenHeight()/2)+20);
+    tExitText.setPosition(static_cast<float>(util.GetScreenWidth())/2, static_cast<float>(util.GetScreenHeight()/2)+40);
+    tScore.setPosition(static_cast<float>(util.GetScreenWidth())/2, static_cast<float>(util.GetScreenHeight()/2)+80);
+    tHit.setPosition(static_cast<float>(util.GetScreenWidth())/2, static_cast<float>(util.GetScreenHeight()/2)+100);
+    tMiss.setPosition(static_cast<float>(util.GetScreenWidth())/2, static_cast<float>(util.GetScreenHeight()/2)+120);
+    tAccuracy.setPosition(static_cast<float>(util.GetScreenWidth())/2, static_cast<float>(util.GetScreenHeight()/2)+140);
 }
 
 void GameoverState::Render()
 {
-
+    // game summary display:
+    window->draw(tEndText);
+    window->draw(tRestartGameText);
+    window->draw(tExitText);
+    window->draw(tScore);
+    window->draw(tHit);
+    window->draw(tMiss);
+    window->draw(tAccuracy);
 }
 
 void GameoverState::EndState() {}
