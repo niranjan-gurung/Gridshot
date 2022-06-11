@@ -95,6 +95,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\SFML-2.5.1\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;opengl32.lib;freetype.lib;sfml-system-s-d.lib;sfml-graphics-s-d.lib;sfml-audio-s-d.lib;sfml-window-s-d.lib;sfml-network-s-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <TargetMachine>MachineX64</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -114,6 +115,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>D:\SFML-2.5.1\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>winmm.lib;opengl32.lib;freetype.lib;sfml-system-s.lib;sfml-graphics-s.lib;sfml-audio-s.lib;sfml-window-s.lib;sfml-network-s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <TargetMachine>MachineX64</TargetMachine>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
