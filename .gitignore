@@ -1,7 +1,3 @@
 .vs/
 bin/
 Debug/
-
-*.vcxproj
-*.vcxproj.user
-*.vcxproj.filters
