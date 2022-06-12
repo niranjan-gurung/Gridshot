@@ -1,4 +1,3 @@
-//#include "GameoverState.h"
 #include "MainMenuState.h"
 
 GameoverState::GameoverState(std::shared_ptr<sf::RenderWindow> window, std::stack<State*>* states, std::shared_ptr<Stats> stats)
