@@ -48,8 +48,7 @@ inline void Game::Start()
 
 inline Game::~Game() 
 { 
-	// gameWindow deallocation;
-	std::cout << "shared_ptr destroyed." << std::endl;
+	std::cout << "gameWindow deallocation." << std::endl;
 
 	while (!states.empty())
 	{

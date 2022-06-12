@@ -7,7 +7,7 @@ MainMenuState::MainMenuState(std::shared_ptr<sf::RenderWindow> window, std::stac
 	fontUtil.SetupText(tStartText, "Click to Start!");
 }
 
-MainMenuState::~MainMenuState() {}
+MainMenuState::~MainMenuState() { std::cout << "menu state destructor" << std::endl; }
 
 void MainMenuState::Update() 
 {

@@ -17,7 +17,7 @@ private:
 	std::array<sf::CircleShape, MAX_TARGETS> targets;	// targets
 
 	// boolean to track state changes:
-	bool targetHit, targetInit, paused, menuTimerThresholdPassed;
+	bool targetHit;
 
 	// stats:
 	std::shared_ptr<Stats> stats;

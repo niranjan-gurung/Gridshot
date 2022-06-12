@@ -19,6 +19,7 @@ GameplayState::GameplayState(std::shared_ptr<sf::RenderWindow> window, std::stac
 
 GameplayState::~GameplayState() 
 {
+    std::cout << "gamplay state destructor" << std::endl;
     TargetCleanup(targets);
 }
 

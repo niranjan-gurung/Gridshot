@@ -32,7 +32,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\State.h">
+    <ClInclude Include="src\States\State.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Util\Util.h">

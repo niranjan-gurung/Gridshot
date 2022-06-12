@@ -164,7 +164,7 @@
     <ClInclude Include="src\States\GameplayState.h" />
     <ClInclude Include="src\States\MainMenuState.h" />
     <ClInclude Include="src\Game.h" />
-    <ClInclude Include="src\State.h" />
+    <ClInclude Include="src\States\State.h" />
     <ClInclude Include="src\Util\Stats.h" />
     <ClInclude Include="src\Util\Util.h" />
   </ItemGroup>
