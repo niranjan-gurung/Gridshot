@@ -12,7 +12,7 @@ class GameplayState : public State
 {
 private:
 	static const int MAX_TARGETS = 3;
-	static const int TIME_LIMIT = 5;
+	static const int TIME_LIMIT = 60;
 
 	std::array<sf::CircleShape, MAX_TARGETS> targets;	// targets
 
