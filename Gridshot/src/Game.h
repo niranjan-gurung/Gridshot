@@ -53,7 +53,6 @@ inline Game::~Game()
 
 	while (!states.empty())
 	{
-		//delete states.top();
 		states.pop();
 	}
 }
