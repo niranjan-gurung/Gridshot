@@ -5,7 +5,7 @@ class Game
 {
 private:
 	std::shared_ptr<sf::RenderWindow> gameWindow;	// main window
-	std::stack<State*> states;						// track states
+	std::stack<std::shared_ptr<State>> states;		// track states
 	Util screenDimensions;							// screen width + height
 
 private:
@@ -26,7 +26,8 @@ inline void Game::InitGameWindow()
 	gameWindow = std::make_unique<sf::RenderWindow>(sf::VideoMode(
 		screenDimensions.GetScreenWidth(), 
 		screenDimensions.GetScreenHeight()), 
-		"Gridshot Clone!"
+		"Gridshot Clone!",
+		sf::Style::Fullscreen
 		);
 	gameWindow->setFramerateLimit(60);
 }
@@ -34,7 +35,7 @@ inline void Game::InitGameWindow()
 inline void Game::InitStates()
 {
 	// default state:
-	states.push(new MainMenuState(this->gameWindow, &this->states));
+	states.push(std::make_unique<MainMenuState>(gameWindow, &states));
 }
 
 inline void Game::Start()
@@ -52,7 +53,7 @@ inline Game::~Game()
 
 	while (!states.empty())
 	{
-		delete states.top();
+		//delete states.top();
 		states.pop();
 	}
 }

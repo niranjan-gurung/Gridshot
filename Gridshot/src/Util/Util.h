@@ -31,7 +31,7 @@ public:
 	int GetScreenHeight() const;
 };
 
-inline Util::Util() : WIDTH(800), HEIGHT(600), tFont(LoadFont())
+inline Util::Util() : WIDTH(1920), HEIGHT(1080), tFont(LoadFont())
 {
 	std::cout << "Util constructor called" << std::endl;
 }

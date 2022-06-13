@@ -1,12 +1,7 @@
 #pragma once
 
 #include "GameoverState.h"
-
-// random number generator for the spawn locations of the targets:
-static std::random_device dev;
-static std::mt19937 rng(dev());
-static std::uniform_int_distribution<std::mt19937::result_type> width(100, 600); 
-static std::uniform_int_distribution<std::mt19937::result_type> height(100, 400);
+#include "../Util/Random.h"
 
 class GameplayState : public State
 {
@@ -15,6 +10,9 @@ private:
 	static const int TIME_LIMIT = 60;
 
 	std::array<sf::CircleShape, MAX_TARGETS> targets;	// targets
+
+	// random number generator for the spawn locations of the targets:
+	Random rand;
 
 	// boolean to track state changes:
 	bool targetHit;
@@ -37,10 +35,9 @@ private:
 	void TargetCleanup(std::array<sf::CircleShape, MAX_TARGETS>& targets);
 
 public:
-	GameplayState(std::shared_ptr<sf::RenderWindow> window, std::stack<State*>* states);
+	GameplayState(std::shared_ptr<sf::RenderWindow> window, std::stack<std::shared_ptr<State>>* states);
 	~GameplayState();
 
 	void Update() override;
 	void Render() override;
-	void EndState() override;
 };

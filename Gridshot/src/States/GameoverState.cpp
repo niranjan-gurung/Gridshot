@@ -1,6 +1,6 @@
 #include "MainMenuState.h"
 
-GameoverState::GameoverState(std::shared_ptr<sf::RenderWindow> window, std::stack<State*>* states, std::shared_ptr<Stats> stats)
+GameoverState::GameoverState(std::shared_ptr<sf::RenderWindow> window, std::stack<std::shared_ptr<State>>* states, std::shared_ptr<Stats> stats)
     : State(window, states), localStats(stats)
 {
     std::cout << "inside the gameover state constructor!" << std::endl;
@@ -24,7 +24,7 @@ GameoverState::~GameoverState()
     std::cout << "gameover state destructor." << std::endl;
 }
 
-// for debugging the stats inside console:
+// for DEBUGGING the stats inside console:
 void GameoverState::displayStatSummary()
 {
     std::cout << "score: " << localStats->score << std::endl;
@@ -48,7 +48,7 @@ void GameoverState::Update()
             if (event.key.code == sf::Keyboard::Space)
             {
                 std::cout << "Game Restarted!" << std::endl;
-                states->push(new MainMenuState(window, states));
+                states->push(std::make_unique<MainMenuState>(window, states));
             }
             // press Esc to close game
             else if (event.key.code == sf::Keyboard::Escape)
@@ -80,5 +80,3 @@ void GameoverState::Render()
     window->draw(tMiss);
     window->draw(tAccuracy);
 }
-
-void GameoverState::EndState() {}

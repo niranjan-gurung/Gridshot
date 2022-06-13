@@ -1,13 +1,16 @@
 #include "MainMenuState.h"
 
-MainMenuState::MainMenuState(std::shared_ptr<sf::RenderWindow> window, std::stack<State*>* states) 
+MainMenuState::MainMenuState(std::shared_ptr<sf::RenderWindow> window, std::stack<std::shared_ptr<State>>* states) 
 	: State(window, states)
 {
 	// load and setup the menu text:
 	fontUtil.SetupText(tStartText, "Click to Start!");
 }
 
-MainMenuState::~MainMenuState() { std::cout << "menu state destructor" << std::endl; }
+MainMenuState::~MainMenuState() 
+{ 
+	std::cout << "menu state destructor" << std::endl; 
+}
 
 void MainMenuState::Update() 
 {
@@ -29,7 +32,7 @@ void MainMenuState::Update()
 				// remove the start text from screen:
 				tStartText.setString("");
 				// load the game state onto the stack:
-				states->push(new GameplayState(window, states));
+				states->push(std::make_unique<GameplayState>(window, states));
 			}
 			break;
 		}
@@ -40,5 +43,3 @@ void MainMenuState::Render()
 {
 	window->draw(tStartText);
 }
-
-void MainMenuState::EndState() {}

@@ -5,7 +5,6 @@
 #include <iomanip>
 #include <stack>
 #include <array>
-#include <random>
 #include <memory>
 
 class State
@@ -13,18 +12,20 @@ class State
 protected:
 	std::shared_ptr<sf::RenderWindow> window;
 	sf::Event event;
-	std::stack<State*>* states;
+	std::stack<std::shared_ptr<State>>* states;
 
 public:
-	State(std::shared_ptr<sf::RenderWindow> window, std::stack<State*>* states);
+	State(std::shared_ptr<sf::RenderWindow> window, std::stack<std::shared_ptr<State>>* states);
 	virtual ~State();
 
 	virtual void Update() = 0;
 	virtual void Render() = 0;
-	virtual void EndState() = 0;
 };
 
-inline State::State(std::shared_ptr<sf::RenderWindow> window, std::stack<State*>* states) 
+inline State::State(std::shared_ptr<sf::RenderWindow> window, std::stack<std::shared_ptr<State>>* states) 
 	: window(window), states(states) {}
 
-inline State::~State() { std::cout << "State Destructor" << std::endl; }
+inline State::~State() 
+{ 
+	std::cout << "State Destructor" << std::endl; 
+}

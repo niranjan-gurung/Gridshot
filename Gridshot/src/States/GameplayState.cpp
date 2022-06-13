@@ -1,6 +1,6 @@
 #include "GameplayState.h"
 
-GameplayState::GameplayState(std::shared_ptr<sf::RenderWindow> window, std::stack<State*>* states)
+GameplayState::GameplayState(std::shared_ptr<sf::RenderWindow> window, std::stack<std::shared_ptr<State>>* states)
     : State(window, states), targetHit(false)
 {
     // Heap init Stats object and update its values during gameplay.
@@ -47,7 +47,10 @@ void GameplayState::Update()
                         stats->accuracy++;
 
                     targetHit = true;
-                    targets[i].setPosition(width(rng), height(rng));
+                    targets[i].setPosition(
+                        rand.DrawNumber(200, util.GetScreenWidth()-300),
+                        rand.DrawNumber(200, util.GetScreenHeight()-300) 
+                    );
 
                     // prevent overlapping spawns
                     PreventOverlap(i, targets);
@@ -87,7 +90,7 @@ void GameplayState::Update()
     if (tElapsedTime >= TIME_LIMIT)
     {
         std::cout << "Time Up!" << std::endl;
-        states->push(new GameoverState(window, states, stats));
+        states->push(std::make_unique<GameoverState>(window, states, stats));
     }
 }
 
@@ -105,8 +108,6 @@ void GameplayState::Render()
     window->draw(tAccuracy);
 }
 
-void GameplayState::EndState() {}
-
 // initial targets setup:
 void GameplayState::InitTargets(std::array<sf::CircleShape, MAX_TARGETS>& targets) 
 {
@@ -114,7 +115,10 @@ void GameplayState::InitTargets(std::array<sf::CircleShape, MAX_TARGETS>& target
     {
         targets[i].setFillColor(sf::Color::Cyan);
         targets[i].setRadius(40.0f);
-        targets[i].setPosition(width(rng), height(rng));
+        targets[i].setPosition(
+            rand.DrawNumber(200, util.GetScreenWidth()-300),
+            rand.DrawNumber(200, util.GetScreenHeight()-300) 
+        );
 
         // prevent overlapping spawns
         PreventOverlap(i, targets);
@@ -128,7 +132,10 @@ void GameplayState::PreventOverlap(int& i, std::array<sf::CircleShape, MAX_TARGE
     {
         while (i != j && targets[i].getGlobalBounds().intersects(targets[j].getGlobalBounds())) 
         {
-            targets[i].setPosition(width(rng), height(rng));
+            targets[i].setPosition(
+                rand.DrawNumber(200, util.GetScreenWidth()-300),
+                rand.DrawNumber(200, util.GetScreenHeight()-300) 
+            );
             j = 0;
         }
     }
