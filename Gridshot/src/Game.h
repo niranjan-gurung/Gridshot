@@ -28,7 +28,7 @@ inline void Game::InitGameWindow()
 		screenDimensions.GetScreenHeight()), 
 		"Gridshot Clone!",
 		sf::Style::Fullscreen
-		);
+	);
 	gameWindow->setFramerateLimit(60);
 }
 

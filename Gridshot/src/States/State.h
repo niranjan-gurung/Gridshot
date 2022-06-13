@@ -15,15 +15,22 @@ protected:
 	std::stack<std::shared_ptr<State>>* states;
 
 public:
-	State(std::shared_ptr<sf::RenderWindow> window, std::stack<std::shared_ptr<State>>* states);
+	State(
+		std::shared_ptr<sf::RenderWindow> window, 
+		std::stack<std::shared_ptr<State>>* states
+	);
 	virtual ~State();
 
 	virtual void Update() = 0;
 	virtual void Render() = 0;
 };
 
-inline State::State(std::shared_ptr<sf::RenderWindow> window, std::stack<std::shared_ptr<State>>* states) 
-	: window(window), states(states) {}
+inline State::State(
+	std::shared_ptr<sf::RenderWindow> window, 
+	std::stack<std::shared_ptr<State>>* states
+) 
+	: window(window), states(states) 
+{}
 
 inline State::~State() 
 { 

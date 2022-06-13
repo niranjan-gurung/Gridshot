@@ -1,10 +1,14 @@
 #include "MainMenuState.h"
 
-MainMenuState::MainMenuState(std::shared_ptr<sf::RenderWindow> window, std::stack<std::shared_ptr<State>>* states) 
+MainMenuState::MainMenuState(
+	std::shared_ptr<sf::RenderWindow> window, 
+	std::stack<std::shared_ptr<State>>* states
+) 
 	: State(window, states)
 {
 	// load and setup the menu text:
-	fontUtil.SetupText(tStartText, "Click to Start!");
+	util.SetupText(tStartText, "Click to Start!");
+	util.SetupText(tWelcometext, "Welcome To Gridshot!");
 }
 
 MainMenuState::~MainMenuState() 
@@ -37,9 +41,14 @@ void MainMenuState::Update()
 			break;
 		}
 	}
+
+	tWelcometext.setPosition(
+		static_cast<float>(util.GetScreenWidth())/2, 
+		(static_cast<float>(util.GetScreenHeight())/2)-50);
 }
 
 void MainMenuState::Render() 
 {
+	window->draw(tWelcometext);
 	window->draw(tStartText);
 }

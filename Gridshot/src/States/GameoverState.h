@@ -14,7 +14,11 @@ private:
 		tScore, tHit, tMiss, tAccuracy;
 
 public:
-	GameoverState(std::shared_ptr<sf::RenderWindow> window, std::stack<std::shared_ptr<State>>* states, std::shared_ptr<Stats> stats);
+	GameoverState(
+		std::shared_ptr<sf::RenderWindow> window, 
+		std::stack<std::shared_ptr<State>>* states, 
+		std::shared_ptr<Stats> stats
+	);
 	~GameoverState();
 
 	void displayStatSummary();

@@ -1,6 +1,9 @@
 #include "GameplayState.h"
 
-GameplayState::GameplayState(std::shared_ptr<sf::RenderWindow> window, std::stack<std::shared_ptr<State>>* states)
+GameplayState::GameplayState(
+    std::shared_ptr<sf::RenderWindow> window, 
+    std::stack<std::shared_ptr<State>>* states
+)
     : State(window, states), targetHit(false)
 {
     // Heap init Stats object and update its values during gameplay.
@@ -76,16 +79,14 @@ void GameplayState::Update()
     tElapsedTime = clock.getElapsedTime().asSeconds();
     // set text as current time:
     tTimer.setString(std::to_string(tElapsedTime));
-    tTimer.setPosition(static_cast<float>(util.GetScreenWidth()) / 2, 5);     
-
+    tTimer.setCharacterSize(35);
+    tTimer.setPosition(static_cast<float>(util.GetScreenWidth())/2, 5);     
     // score:
     tScore.setString("Score: " + std::to_string(stats->score));
-    tScore.setPosition(static_cast<float>(util.GetScreenWidth()) - 200, 5);
-
+    tScore.setPosition(static_cast<float>(util.GetScreenWidth())-200, 15);
     // accuracy:
     tAccuracy.setString("Accuracy: " + std::to_string(stats->accuracy) + "%");
-    tAccuracy.setPosition(200, 5);
-
+    tAccuracy.setPosition(200, 15);
     // when gameplay timer runs out, enter the gameover state:
     if (tElapsedTime >= TIME_LIMIT)
     {
@@ -114,7 +115,7 @@ void GameplayState::InitTargets(std::array<sf::CircleShape, MAX_TARGETS>& target
     for (int i = 0; i < MAX_TARGETS; i++) 
     {
         targets[i].setFillColor(sf::Color::Cyan);
-        targets[i].setRadius(40.0f);
+        targets[i].setRadius(60.0f);
         targets[i].setPosition(
             rand.DrawNumber(200, util.GetScreenWidth()-300),
             rand.DrawNumber(200, util.GetScreenHeight()-300) 

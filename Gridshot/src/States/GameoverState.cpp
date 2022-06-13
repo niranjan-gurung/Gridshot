@@ -1,6 +1,10 @@
 #include "MainMenuState.h"
 
-GameoverState::GameoverState(std::shared_ptr<sf::RenderWindow> window, std::stack<std::shared_ptr<State>>* states, std::shared_ptr<Stats> stats)
+GameoverState::GameoverState(
+    std::shared_ptr<sf::RenderWindow> window, 
+    std::stack<std::shared_ptr<State>>* states, 
+    std::shared_ptr<Stats> stats
+)
     : State(window, states), localStats(stats)
 {
     std::cout << "inside the gameover state constructor!" << std::endl;
@@ -61,12 +65,24 @@ void GameoverState::Update()
     }
 
     // game summary text position setup:
-    tRestartGameText.setPosition(static_cast<float>(util.GetScreenWidth())/2, static_cast<float>(util.GetScreenHeight()/2)+20);
-    tExitText.setPosition(static_cast<float>(util.GetScreenWidth())/2, static_cast<float>(util.GetScreenHeight()/2)+40);
-    tScore.setPosition(static_cast<float>(util.GetScreenWidth())/2, static_cast<float>(util.GetScreenHeight()/2)+80);
-    tHit.setPosition(static_cast<float>(util.GetScreenWidth())/2, static_cast<float>(util.GetScreenHeight()/2)+100);
-    tMiss.setPosition(static_cast<float>(util.GetScreenWidth())/2, static_cast<float>(util.GetScreenHeight()/2)+120);
-    tAccuracy.setPosition(static_cast<float>(util.GetScreenWidth())/2, static_cast<float>(util.GetScreenHeight()/2)+140);
+    tRestartGameText.setPosition(
+        static_cast<float>(util.GetScreenWidth())/2, 
+        static_cast<float>(util.GetScreenHeight()/2)+20);
+    tExitText.setPosition(
+        static_cast<float>(util.GetScreenWidth())/2, 
+        static_cast<float>(util.GetScreenHeight()/2)+40);
+    tScore.setPosition(
+        static_cast<float>(util.GetScreenWidth())/2, 
+        static_cast<float>(util.GetScreenHeight()/2)+80);
+    tHit.setPosition(
+        static_cast<float>(util.GetScreenWidth())/2, 
+        static_cast<float>(util.GetScreenHeight()/2)+100);
+    tMiss.setPosition(
+        static_cast<float>(util.GetScreenWidth())/2, 
+        static_cast<float>(util.GetScreenHeight()/2)+120);
+    tAccuracy.setPosition(
+        static_cast<float>(util.GetScreenWidth())/2, 
+        static_cast<float>(util.GetScreenHeight()/2)+140);
 }
 
 void GameoverState::Render()

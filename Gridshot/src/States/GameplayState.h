@@ -35,7 +35,10 @@ private:
 	void TargetCleanup(std::array<sf::CircleShape, MAX_TARGETS>& targets);
 
 public:
-	GameplayState(std::shared_ptr<sf::RenderWindow> window, std::stack<std::shared_ptr<State>>* states);
+	GameplayState(
+		std::shared_ptr<sf::RenderWindow> window, 
+		std::stack<std::shared_ptr<State>>* states
+	);
 	~GameplayState();
 
 	void Update() override;

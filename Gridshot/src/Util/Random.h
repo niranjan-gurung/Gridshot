@@ -17,7 +17,8 @@ private:
 };
 
 inline Random::Random()
-    : rng(dev()) {}
+    : rng(dev()) 
+{}
 
 inline uint32_t Random::DrawNumber(uint32_t min, uint32_t max) 
 { 
