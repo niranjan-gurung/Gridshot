@@ -72,6 +72,19 @@ void GameplayState::Update()
                 stats->accuracy -= 1.5;  // if miss -> lower accuracy
             }
             break;
+
+        case sf::Event::KeyPressed:
+            // press Esc to close game
+            if (event.key.code == sf::Keyboard::Escape)
+            {
+                std::cout << "Game Paused!" << std::endl;
+                
+                // push pause state onto the stack...
+                // states->push ( new PauseState(window, states) );
+                
+                window->close();
+            }
+            break;
         }
     }
 
