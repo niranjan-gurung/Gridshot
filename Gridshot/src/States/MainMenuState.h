@@ -6,8 +6,7 @@ class MainMenuState : public State
 {
 private:
 	Util util;
-	sf::Text tStartText;
-	sf::Text tWelcometext;
+	sf::Text tStartText, tWelcometext, tExitText;
 
 public:
 	MainMenuState(

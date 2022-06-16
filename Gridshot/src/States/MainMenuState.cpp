@@ -9,6 +9,7 @@ MainMenuState::MainMenuState(
 	// load and setup the menu text:
 	util.SetupText(tStartText, "Click to Start!");
 	util.SetupText(tWelcometext, "Welcome To Gridshot!");
+	util.SetupText(tExitText, "Press Esc to close game!");
 }
 
 MainMenuState::~MainMenuState() 
@@ -39,16 +40,30 @@ void MainMenuState::Update()
 				states->push(std::make_unique<GameplayState>(window, states));
 			}
 			break;
+		
+		case sf::Event::KeyPressed:
+			// press Esc to close game
+			if (event.key.code == sf::Keyboard::Escape)
+			{
+				std::cout << "Game Closed!" << std::endl;
+				window->close();
+			}
+			break;
 		}
 	}
 
 	tWelcometext.setPosition(
 		static_cast<float>(util.GetScreenWidth())/2, 
 		(static_cast<float>(util.GetScreenHeight())/2)-50);
+
+	tExitText.setPosition(
+		static_cast<float>(util.GetScreenWidth())/2, 
+		(static_cast<float>(util.GetScreenHeight())/2)+50);
 }
 
 void MainMenuState::Render() 
 {
 	window->draw(tWelcometext);
 	window->draw(tStartText);
+	window->draw(tExitText);
 }
