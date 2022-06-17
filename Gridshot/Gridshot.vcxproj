@@ -158,12 +158,14 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\States\MainMenuState.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\States\PauseState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\States\GameoverState.h" />
     <ClInclude Include="src\States\GameplayState.h" />
     <ClInclude Include="src\States\MainMenuState.h" />
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\States\PauseState.h" />
     <ClInclude Include="src\States\State.h" />
     <ClInclude Include="src\Util\Random.h" />
     <ClInclude Include="src\Util\Stats.h" />

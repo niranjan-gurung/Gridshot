@@ -15,7 +15,7 @@ private:
 	Random rand;
 
 	// boolean to track state changes:
-	bool targetHit;
+	bool targetHit, paused;
 
 	// stats:
 	std::shared_ptr<Stats> stats;
