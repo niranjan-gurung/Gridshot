@@ -26,8 +26,8 @@ inline void Game::InitGameWindow()
 	gameWindow = std::make_unique<sf::RenderWindow>(sf::VideoMode(
 		screenDimensions.GetScreenWidth(), 
 		screenDimensions.GetScreenHeight()), 
-		"Gridshot Clone!"//,
-		/*sf::Style::Fullscreen*/
+		"Gridshot Clone!",
+		sf::Style::Fullscreen
 	);
 	gameWindow->setFramerateLimit(60);
 }

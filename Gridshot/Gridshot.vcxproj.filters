@@ -30,9 +30,6 @@
     <ClCompile Include="src\States\GameoverState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\States\PauseState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\States\State.h">
@@ -57,9 +54,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Util\Random.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\States\PauseState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

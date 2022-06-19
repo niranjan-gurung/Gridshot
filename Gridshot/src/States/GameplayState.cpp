@@ -1,11 +1,10 @@
 #include "GameplayState.h"
-#include "PauseState.h"
 
 GameplayState::GameplayState(
     std::shared_ptr<sf::RenderWindow> window, 
     std::stack<std::shared_ptr<State>>* states
 )
-    : State(window, states), targetHit(false), paused(false)
+    : State(window, states), targetHit(false)
 {
     // Heap init Stats object and update its values during gameplay.
     // This object will get passed into and printed in the gameoverstate as a summary:
@@ -29,91 +28,70 @@ GameplayState::~GameplayState()
 
 void GameplayState::Update()
 {
-    if (!paused)
+    while (window->pollEvent(event))
     {
-        while (window->pollEvent(event))
+        switch (event.type)
         {
-            switch (event.type)
+        case sf::Event::Closed:
+            window->close();
+            break;
+
+            // gameplay logic:
+        case sf::Event::MouseButtonPressed: 
+            for (int i = 0; i < MAX_TARGETS; i++) 
             {
-            case sf::Event::Closed:
-                window->close();
-                break;
-
-                // gameplay logic:
-            case sf::Event::MouseButtonPressed: 
-                for (int i = 0; i < MAX_TARGETS; i++) 
+                if (targets[i].getGlobalBounds().contains(window->mapPixelToCoords(sf::Mouse::getPosition(*window)))) 
                 {
-                    if (targets[i].getGlobalBounds().contains(window->mapPixelToCoords(sf::Mouse::getPosition(*window)))) 
-                    {
-                        stats->hitCounter++;
-                        stats->score += 10;
+                    stats->hitCounter++;
+                    stats->score += 10;
 
-                        // cap accuracy at 100%
-                        if (stats->accuracy < 100)
-                            stats->accuracy++;
+                    // cap accuracy at 100%
+                    if (stats->accuracy < 100)
+                        stats->accuracy++;
 
-                        targetHit = true;
-                        targets[i].setPosition(
-                            rand.DrawNumber(200, util.GetScreenWidth()-300),
-                            rand.DrawNumber(200, util.GetScreenHeight()-300) 
-                        );
+                    targetHit = true;
+                    targets[i].setPosition(
+                        rand.DrawNumber(200, util.GetScreenWidth()-300),
+                        rand.DrawNumber(200, util.GetScreenHeight()-300) 
+                    );
 
-                        // prevent overlapping spawns
-                        PreventOverlap(i, targets);
-                        // if click hits one of the targets, then terminate out of loop early.
-                        break;
-                    }
-                    else
-                    {
-                        targetHit = false;  // if click misses the set of targets 
-                    }
+                    // prevent overlapping spawns
+                    PreventOverlap(i, targets);
+                    // if click hits one of the targets, then terminate out of loop early.
+                    break;
                 }
-                // dont increment missed shots when clicking initial screen to proceed:
-                if (!targetHit)
+                else
                 {
-                    stats->missCounter++;
-                    stats->accuracy -= 1.5;  // if miss -> lower accuracy
+                    targetHit = false;  // if click misses the set of targets 
                 }
-                break;
-
-            case sf::Event::KeyPressed:
-                // press Esc to close game
-                if (event.key.code == sf::Keyboard::Escape)
-                {
-                    std::cout << "Game Paused!" << std::endl;
-                
-                    paused = true;
-                    // push pause state onto the stack...
-                    states->push(std::make_unique<PauseState>(window, states));
-                }
-                break;
             }
-        }
-    
-        // get current time:
-        tElapsedTime = clock.getElapsedTime().asSeconds();
-        // set text as current time:
-        tTimer.setString(std::to_string(tElapsedTime));
-        tTimer.setCharacterSize(35);
-        tTimer.setPosition(static_cast<float>(util.GetScreenWidth())/2, 5);     
-        // score:
-        tScore.setString("Score: " + std::to_string(stats->score));
-        tScore.setPosition(static_cast<float>(util.GetScreenWidth())-200, 15);
-        // accuracy:
-        tAccuracy.setString("Accuracy: " + std::to_string(stats->accuracy) + "%");
-        tAccuracy.setPosition(200, 15);
-        // when gameplay timer runs out, enter the gameover state:
-        if (tElapsedTime >= TIME_LIMIT)
-        {
-            std::cout << "Time Up!" << std::endl;
-            states->push(std::make_unique<GameoverState>(window, states, stats));
+            // dont increment missed shots when clicking initial screen to proceed:
+            if (!targetHit)
+            {
+                stats->missCounter++;
+                stats->accuracy -= 1.5;  // if miss -> lower accuracy
+            }
+            break;
         }
     }
-
-    else if (PauseState::unpaused)
+    
+    // get current time:
+    tElapsedTime = clock.getElapsedTime().asSeconds();
+    // set text as current time:
+    tTimer.setString(std::to_string(tElapsedTime));
+    tTimer.setCharacterSize(35);
+    tTimer.setPosition(static_cast<float>(util.GetScreenWidth())/2, 5);     
+    // score:
+    tScore.setString("Score: " + std::to_string(stats->score));
+    tScore.setPosition(static_cast<float>(util.GetScreenWidth())-200, 15);
+    // accuracy:
+    tAccuracy.setString("Accuracy: " + std::to_string(stats->accuracy) + "%");
+    tAccuracy.setPosition(200, 15);
+    // when gameplay timer runs out, enter the gameover state:
+    if (tElapsedTime >= TIME_LIMIT)
     {
-        paused = false;
-        PauseState::unpaused = false;
+        std::cout << "Time Up!" << std::endl;
+        states->push(std::make_unique<GameoverState>(window, states, stats));
     }
 }
 
